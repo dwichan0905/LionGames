@@ -1,6 +1,5 @@
 package id.dwichan.liongames.ui.main.games
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,31 +7,18 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import id.dwichan.liongames.MyApplication
 import id.dwichan.liongames.R
 import id.dwichan.liongames.core.data.Resource
 import id.dwichan.liongames.core.ui.GamesAdapter
-import id.dwichan.liongames.core.ui.ViewModelFactory
 import id.dwichan.liongames.databinding.FragmentGamesBinding
 import id.dwichan.liongames.ui.details.DetailsActivity
-import javax.inject.Inject
+import org.koin.android.viewmodel.ext.android.viewModel
 
 class GamesFragment : Fragment() {
 
-    @Inject
-    lateinit var factory: ViewModelFactory
-
-    private val gamesViewModel: GamesViewModel by viewModels {
-        factory
-    }
+    private val gamesViewModel: GamesViewModel by viewModel()
     private var binding: FragmentGamesBinding? = null
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        (requireActivity().application as MyApplication).appComponent.inject(this)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater,

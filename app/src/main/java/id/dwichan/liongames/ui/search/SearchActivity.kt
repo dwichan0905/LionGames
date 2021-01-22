@@ -4,31 +4,21 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import id.dwichan.liongames.MyApplication
 import id.dwichan.liongames.R
 import id.dwichan.liongames.core.data.Resource
 import id.dwichan.liongames.core.ui.GamesAdapter
-import id.dwichan.liongames.core.ui.ViewModelFactory
 import id.dwichan.liongames.databinding.ActivitySearchBinding
 import id.dwichan.liongames.ui.details.DetailsActivity
-import javax.inject.Inject
+import org.koin.android.viewmodel.ext.android.viewModel
 
 class SearchActivity : AppCompatActivity() {
 
-    @Inject
-    lateinit var factory: ViewModelFactory
-
     private var binding: ActivitySearchBinding? = null
     private lateinit var adapter: GamesAdapter
-
-    private val searchViewModel: SearchViewModel by viewModels {
-        factory
-    }
+    private val searchViewModel: SearchViewModel by viewModel()
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == android.R.id.home) super.onBackPressed()
@@ -36,7 +26,6 @@ class SearchActivity : AppCompatActivity() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        (application as MyApplication).appComponent.inject(this)
         super.onCreate(savedInstanceState)
         binding = ActivitySearchBinding.inflate(layoutInflater)
         setContentView(binding?.root)
@@ -54,7 +43,6 @@ class SearchActivity : AppCompatActivity() {
         binding?.rvGames?.layoutManager = LinearLayoutManager(this)
 
         binding?.search?.query?.toString()?.let { getSearchResult(it) }
-
         binding?.search?.setIconifiedByDefault(false)
         binding?.search?.queryHint = getString(R.string.search)
         binding?.search?.setOnQueryTextListener(object : SearchView.OnQueryTextListener {

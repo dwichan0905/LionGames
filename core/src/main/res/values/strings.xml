@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="example_game_name">Grand Theft Auto V</string>
+    <string name="example_genre">Action</string>
+    <string name="example_rating">4.48</string>
+</resources>
