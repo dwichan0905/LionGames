@@ -1,0 +1,32 @@
+<resources>
+    <string name="app_name">LionGames</string>
+    <string name="title_games">Games</string>
+    <string name="title_favorites">Your Favorite</string>
+    <string name="example_game_name">Grand Theft Auto V</string>
+    <string name="example_genre">Action</string>
+    <string name="example_rating">4.48</string>
+    <plurals name="total_playtime">
+        <item quantity="one">%d hour</item>
+        <item quantity="other">%d hours</item>
+    </plurals>
+    <plurals name="total_search">
+        <item quantity="zero">No result found.</item>
+        <item quantity="one">Found 1 item.</item>
+        <item quantity="other">Found %d items.</item>
+    </plurals>
+    <string name="error">Something went wrong, dude :(</string>
+    <string name="example_platforms">Windows, Xbox, PlayStation</string>
+    <string name="supported_platforms">Supported Platforms</string>
+    <string name="example_playtime">1000 hrs</string>
+    <string name="playtime">Playtime</string>
+    <string name="example_genres">Action, Adventure</string>
+    <string name="genres">Genres</string>
+    <string name="system_requirements">System Requirements for %s</string>
+    <string name="example_text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ac nibh facilisis, rutrum elit ac, hendrerit velit. Maecenas id congue dolor. Pellentesque facilisis accumsan metus, non egestas neque blandit sed. Duis dictum elit velit. Morbi consequat dolor sed fringilla aliquam. Aliquam sem ante, aliquet in iaculis id, volutpat non ligula. Quisque eu consectetur ante. Praesent quis nisl volutpat, sodales nibh ut, mollis orci. Quisque scelerisque nisl sed arcu faucibus ultrices. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Sed blandit lorem eu nibh laoreet semper. Etiam consequat purus ut sem interdum, quis aliquam orci molestie. Nulla gravida massa arcu, eget porttitor est pellentesque nec. Cras fermentum condimentum dapibus. Ut suscipit, dui non ultricies posuere, mi nulla viverra sapien, et lobortis nisi dolor non erat.</string>
+    <string name="add_to_favorite">Add to Favorite</string>
+    <string name="remove_from_favorite">Remove from Favorite</string>
+    <string name="empty">No any games listed here. Please add these game as your favorite.</string>
+    <string name="search">Find games...</string>
+    <string name="example_result">Found 0 result.</string>
+    <string name="search_end">- Search results is over. -</string>
+</resources>
