@@ -11,26 +11,15 @@ import id.dwichan.liongames.core.utils.DataMapper
 import io.reactivex.Flowable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
+import javax.inject.Inject
+import javax.inject.Singleton
 
-class GamesRepository private constructor(
+@Singleton
+class GamesRepository @Inject constructor(
     private val remoteDataSource: RemoteDataSource,
     private val localDataSource: LocalDataSource,
     private val appExecutors: AppExecutors
 ) : IGameRepository {
-
-    companion object {
-        @Volatile
-        private var instance: GamesRepository? = null
-
-        fun getInstance(
-            remoteDataSource: RemoteDataSource,
-            localDataSource: LocalDataSource,
-            appExecutors: AppExecutors
-        ): GamesRepository =
-            instance ?: synchronized(this) {
-                instance ?: GamesRepository(remoteDataSource, localDataSource, appExecutors)
-            }
-    }
 
     override fun getAllGames(): Flowable<Resource<List<Game>>> {
         return object : NetworkBoundResource<List<Game>, List<GameResponse>>(appExecutors) {
@@ -76,10 +65,12 @@ class GamesRepository private constructor(
 
             override fun saveCallResult(data: List<GameResponse>) {
                 val gamesList = DataMapper.mapResponsesToEntities(data)
-                localDataSource.insertGames(gamesList)
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe()
+                if (!gamesList.isNullOrEmpty()) {
+                    localDataSource.insertGames(gamesList)
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe()
+                }
             }
         }.asFlowable()
     }

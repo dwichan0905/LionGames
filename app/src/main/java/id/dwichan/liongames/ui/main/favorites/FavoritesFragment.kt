@@ -1,21 +1,30 @@
 package id.dwichan.liongames.ui.main.favorites
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import id.dwichan.liongames.MyApplication
 import id.dwichan.liongames.core.ui.GamesAdapter
 import id.dwichan.liongames.core.ui.ViewModelFactory
 import id.dwichan.liongames.databinding.FragmentFavoritesBinding
 import id.dwichan.liongames.ui.details.DetailsActivity
+import javax.inject.Inject
 
 class FavoritesFragment : Fragment() {
 
-    private lateinit var favoritesViewModel: FavoritesViewModel
+    @Inject
+    lateinit var factory: ViewModelFactory
+
+    private val favoritesViewModel: FavoritesViewModel by viewModels {
+        factory
+    }
     private var binding: FragmentFavoritesBinding? = null
 
     override fun onCreateView(
@@ -25,6 +34,11 @@ class FavoritesFragment : Fragment() {
     ): View? {
         binding = FragmentFavoritesBinding.inflate(inflater, container, false)
         return binding?.root
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        (requireActivity().application as MyApplication).appComponent.inject(this)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -40,10 +54,6 @@ class FavoritesFragment : Fragment() {
                 startActivity(i)
             }
 
-            val factory = ViewModelFactory.getInstance(requireContext())
-            favoritesViewModel = ViewModelProvider(this, factory)[
-                    FavoritesViewModel::class.java
-            ]
             favoritesViewModel.games.observe(viewLifecycleOwner, {
                 binding?.progressBar?.visibility = View.GONE
                 if (it.isEmpty()) {

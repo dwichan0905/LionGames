@@ -2,8 +2,9 @@ package id.dwichan.liongames.core.domain.usecase
 
 import id.dwichan.liongames.core.domain.model.Game
 import id.dwichan.liongames.core.domain.repository.IGameRepository
+import javax.inject.Inject
 
-class GameInteractor(private val gameRepository: IGameRepository) : GameUseCase {
+class GameInteractor @Inject constructor(private val gameRepository: IGameRepository) : GameUseCase {
 
     override fun getAllGames() = gameRepository.getAllGames()
 

@@ -4,22 +4,31 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import id.dwichan.liongames.MyApplication
 import id.dwichan.liongames.R
 import id.dwichan.liongames.core.data.Resource
 import id.dwichan.liongames.core.ui.GamesAdapter
 import id.dwichan.liongames.core.ui.ViewModelFactory
 import id.dwichan.liongames.databinding.ActivitySearchBinding
 import id.dwichan.liongames.ui.details.DetailsActivity
+import javax.inject.Inject
 
 class SearchActivity : AppCompatActivity() {
 
+    @Inject
+    lateinit var factory: ViewModelFactory
+
     private var binding: ActivitySearchBinding? = null
     private lateinit var adapter: GamesAdapter
-    private lateinit var searchViewModel: SearchViewModel
+
+    private val searchViewModel: SearchViewModel by viewModels {
+        factory
+    }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == android.R.id.home) super.onBackPressed()
@@ -27,6 +36,7 @@ class SearchActivity : AppCompatActivity() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        (application as MyApplication).appComponent.inject(this)
         super.onCreate(savedInstanceState)
         binding = ActivitySearchBinding.inflate(layoutInflater)
         setContentView(binding?.root)
@@ -43,10 +53,6 @@ class SearchActivity : AppCompatActivity() {
         binding?.rvGames?.adapter = adapter
         binding?.rvGames?.layoutManager = LinearLayoutManager(this)
 
-        val factory = ViewModelFactory.getInstance(this)
-        searchViewModel = ViewModelProvider(this, factory)[
-                SearchViewModel::class.java
-        ]
         binding?.search?.query?.toString()?.let { getSearchResult(it) }
 
         binding?.search?.setIconifiedByDefault(false)

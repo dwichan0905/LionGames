@@ -1,30 +1,17 @@
 package id.dwichan.liongames.core.ui
 
-import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import id.dwichan.liongames.core.di.Injection
 import id.dwichan.liongames.core.domain.usecase.GameUseCase
 import id.dwichan.liongames.ui.details.DetailsViewModel
 import id.dwichan.liongames.ui.main.favorites.FavoritesViewModel
 import id.dwichan.liongames.ui.main.games.GamesViewModel
 import id.dwichan.liongames.ui.search.SearchViewModel
+import javax.inject.Inject
 
-class ViewModelFactory private constructor(
+class ViewModelFactory @Inject constructor(
     private val gameUseCase: GameUseCase
 ) : ViewModelProvider.NewInstanceFactory() {
-
-    companion object {
-        @Volatile
-        private var instance: ViewModelFactory? = null
-
-        fun getInstance(context: Context): ViewModelFactory =
-            instance ?: synchronized(this) {
-                instance ?: ViewModelFactory(
-                    Injection.provideGameUseCase(context)
-                )
-            }
-    }
 
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel?> create(modelClass: Class<T>): T =

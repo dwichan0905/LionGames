@@ -7,5 +7,5 @@ data class ListGamesResponse(
     val count: Int,
 
     @field:SerializedName("results")
-    val results: List<GameResponse>
+    val results: List<GameResponse>?
 )

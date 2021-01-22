@@ -3,16 +3,11 @@ package id.dwichan.liongames.core.data.source.local
 import id.dwichan.liongames.core.data.source.local.entity.GameEntity
 import id.dwichan.liongames.core.data.source.local.room.GamesDao
 import io.reactivex.Flowable
+import javax.inject.Inject
+import javax.inject.Singleton
 
-class LocalDataSource private constructor(private val gamesDao: GamesDao) {
-    companion object {
-        private var instance: LocalDataSource? = null
-
-        fun getInstance(gamesDao: GamesDao): LocalDataSource =
-            instance ?: synchronized(this) {
-                instance ?: LocalDataSource(gamesDao)
-            }
-    }
+@Singleton
+class LocalDataSource @Inject constructor(private val gamesDao: GamesDao) {
 
     fun getAllGames(): Flowable<List<GameEntity>> = gamesDao.getAllGames()
 

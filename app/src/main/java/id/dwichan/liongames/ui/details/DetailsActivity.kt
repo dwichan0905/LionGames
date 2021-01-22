@@ -2,6 +2,7 @@ package id.dwichan.liongames.ui.details
 
 import android.os.Bundle
 import android.view.MenuItem
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.text.HtmlCompat
@@ -9,14 +10,22 @@ import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
+import id.dwichan.liongames.MyApplication
 import id.dwichan.liongames.R
 import id.dwichan.liongames.core.domain.model.Game
 import id.dwichan.liongames.core.ui.ViewModelFactory
 import id.dwichan.liongames.databinding.ActivityDetailsBinding
+import javax.inject.Inject
 
 class DetailsActivity : AppCompatActivity() {
 
-    private lateinit var detailsViewModel: DetailsViewModel
+    @Inject
+    lateinit var factory: ViewModelFactory
+
+    private val detailsViewModel: DetailsViewModel by viewModels {
+        factory
+    }
+
     private var binding: ActivityDetailsBinding? = null
     private val requestOptions = RequestOptions()
         .diskCacheStrategy(DiskCacheStrategy.ALL)
@@ -27,17 +36,13 @@ class DetailsActivity : AppCompatActivity() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        (application as MyApplication).appComponent.inject(this)
         super.onCreate(savedInstanceState)
         binding = ActivityDetailsBinding.inflate(layoutInflater)
         setContentView(binding?.root)
 
         setSupportActionBar(binding?.toolbar!!)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-
-        val factory = ViewModelFactory.getInstance(this)
-        detailsViewModel = ViewModelProvider(this, factory)[
-                DetailsViewModel::class.java
-        ]
 
         val gameDetail = intent.getParcelableExtra<Game>(EXTRA_GAMES)
         showDetails(gameDetail)
