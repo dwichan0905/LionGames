@@ -1,10 +1,10 @@
 package id.dwichan.liongames.ui.search
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -63,11 +63,11 @@ class SearchActivity : AppCompatActivity() {
                 return true
             }
         })
+        binding?.search?.requestFocus()
     }
 
     private fun getSearchResult(query: String) {
-        searchViewModel.setQuery(query)
-        searchViewModel.games.observe(this, { games ->
+        searchViewModel.getGames(query).observe(this, { games ->
             if (games != null) {
                 when (games) {
                     is Resource.Loading -> {

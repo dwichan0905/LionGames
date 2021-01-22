@@ -13,7 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.LionGames"
         tools:ignore="AllowBackup">
-        <activity android:name=".ui.search.SearchActivity"></activity>
+        <activity android:name=".ui.search.SearchActivity" />
         <activity android:name=".ui.main.MainActivity" />
         <activity android:name=".ui.details.DetailsActivity" />
         <activity android:name=".ui.SplashActivity">

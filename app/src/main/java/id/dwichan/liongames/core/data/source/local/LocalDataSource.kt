@@ -1,8 +1,8 @@
 package id.dwichan.liongames.core.data.source.local
 
-import androidx.lifecycle.LiveData
 import id.dwichan.liongames.core.data.source.local.entity.GameEntity
 import id.dwichan.liongames.core.data.source.local.room.GamesDao
+import io.reactivex.Flowable
 
 class LocalDataSource private constructor(private val gamesDao: GamesDao) {
     companion object {
@@ -14,13 +14,12 @@ class LocalDataSource private constructor(private val gamesDao: GamesDao) {
             }
     }
 
-    fun getAllGames(): LiveData<List<GameEntity>> = gamesDao.getAllGames()
+    fun getAllGames(): Flowable<List<GameEntity>> = gamesDao.getAllGames()
 
-    fun getSpecificGames(query: String): LiveData<List<GameEntity>> = gamesDao.getSpecificGames(query)
+    fun getSpecificGames(query: String): Flowable<List<GameEntity>> =
+        gamesDao.getSpecificGames(query)
 
-    fun getFavoriteGames(): LiveData<List<GameEntity>> = gamesDao.getFavoriteGames()
-
-    fun getSpecificFavoriteGames(query: String): LiveData<List<GameEntity>> = gamesDao.getSpecificFavoriteGames(query)
+    fun getFavoriteGames(): Flowable<List<GameEntity>> = gamesDao.getFavoriteGames()
 
     fun insertGames(games: List<GameEntity>) = gamesDao.insertGames(games)
 

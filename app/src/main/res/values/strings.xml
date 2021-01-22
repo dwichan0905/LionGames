@@ -26,7 +26,7 @@
     <string name="add_to_favorite">Add to Favorite</string>
     <string name="remove_from_favorite">Remove from Favorite</string>
     <string name="empty">No any games listed here. Please add these game as your favorite.</string>
-    <string name="search">Find games...</string>
+    <string name="search">Find games…</string>
     <string name="example_result">Found 0 result.</string>
     <string name="search_end">- Search results is over. -</string>
 </resources>
