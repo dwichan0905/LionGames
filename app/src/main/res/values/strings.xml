@@ -29,4 +29,5 @@
     <string name="search">Find games…</string>
     <string name="example_result">Found 0 result.</string>
     <string name="search_end">- Search results is over. -</string>
+    <string name="title_favorite">Your Favorite</string>
 </resources>

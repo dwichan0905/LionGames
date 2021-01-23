@@ -1,4 +1,4 @@
-package id.dwichan.liongames.ui.main.favorites
+package id.dwichan.liongamesdfm.favorite
 
 import android.content.Intent
 import android.os.Bundle
@@ -8,14 +8,20 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import id.dwichan.liongames.core.ui.GamesAdapter
-import id.dwichan.liongames.databinding.FragmentFavoritesBinding
 import id.dwichan.liongames.ui.details.DetailsActivity
+import id.dwichan.liongamesdfm.favorite.databinding.FragmentFavoritesBinding
 import org.koin.android.viewmodel.ext.android.viewModel
+import org.koin.core.context.loadKoinModules
 
 class FavoritesFragment : Fragment() {
 
     private val favoritesViewModel: FavoritesViewModel by viewModel()
     private var binding: FragmentFavoritesBinding? = null
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        loadKoinModules(favoriteModule)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -42,10 +48,10 @@ class FavoritesFragment : Fragment() {
             favoritesViewModel.games.observe(viewLifecycleOwner, {
                 binding?.progressBar?.visibility = View.GONE
                 if (it.isEmpty()) {
-                    binding?.viewEmpty?.root?.visibility = View.VISIBLE
+                    binding?.viewEmpty?.visibility = View.VISIBLE
                     adapter.setData(ArrayList())
                 } else {
-                    binding?.viewEmpty?.root?.visibility = View.GONE
+                    binding?.viewEmpty?.visibility = View.GONE
                     adapter.setData(it)
                 }
             })

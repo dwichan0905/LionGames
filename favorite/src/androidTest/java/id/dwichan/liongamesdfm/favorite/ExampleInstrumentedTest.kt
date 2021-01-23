@@ -1,4 +1,4 @@
-package id.dwichan.liongames.core
+package id.dwichan.liongamesdfm.favorite
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
@@ -17,6 +17,6 @@ class ExampleInstrumentedTest {
     fun useAppContext() {
         // Context of the app under test.
         val appContext = InstrumentationRegistry.getInstrumentation().targetContext
-        assertEquals("id.dwichan.liongames.core.test", appContext.packageName)
+        assertEquals("id.dwichan.liongamesdfm.favorite", appContext.packageName)
     }
 }

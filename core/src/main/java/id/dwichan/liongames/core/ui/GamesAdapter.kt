@@ -8,8 +8,8 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
 import id.dwichan.liongames.core.R
-import id.dwichan.liongames.core.domain.model.Game
 import id.dwichan.liongames.core.databinding.ItemGamesBinding
+import id.dwichan.liongames.core.domain.model.Game
 
 class GamesAdapter : RecyclerView.Adapter<GamesAdapter.GamesViewHolder>() {
 

@@ -1,4 +1,4 @@
-package id.dwichan.liongames.ui.main.favorites
+package id.dwichan.liongamesdfm.favorite
 
 import androidx.lifecycle.LiveDataReactiveStreams
 import androidx.lifecycle.ViewModel

@@ -1,4 +1,4 @@
-package id.dwichan.liongames.core
+package id.dwichan.liongamesdfm.favorite
 
 import org.junit.Assert.assertEquals
 import org.junit.Test

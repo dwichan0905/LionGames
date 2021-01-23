@@ -13,8 +13,9 @@
 
     <fragment
         android:id="@+id/navigation_favorites"
-        android:name="id.dwichan.liongames.ui.main.favorites.FavoritesFragment"
+        android:name="id.dwichan.liongamesdfm.favorite.FavoritesFragment"
         android:label="@string/title_favorites"
+        app:moduleName="favorite"
         tools:layout="@layout/fragment_favorites" />
 
 </navigation>
