@@ -5,7 +5,6 @@ import android.graphics.Color
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import id.dwichan.liongames.databinding.ActivitySplashBinding
 import id.dwichan.liongames.ui.main.MainActivity
