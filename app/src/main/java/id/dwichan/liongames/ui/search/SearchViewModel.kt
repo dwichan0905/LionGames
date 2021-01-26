@@ -11,9 +11,9 @@ class SearchViewModel(private val gameUseCase: GameUseCase) : ViewModel() {
     private val query: LiveData<String> get() = _query
 
     val data: LiveData<Resource<List<Game>>> = query.switchMap {
-        LiveDataReactiveStreams.fromPublisher(
-            gameUseCase.getSpecificGames(it)
-        )
+            LiveDataReactiveStreams.fromPublisher(
+                gameUseCase.getSpecificGames(it)
+            )
     }
 
     fun setQuery(query: String) {

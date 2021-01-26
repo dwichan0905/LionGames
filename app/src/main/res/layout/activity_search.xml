@@ -20,14 +20,17 @@
     </androidx.appcompat.widget.Toolbar>
 
     <androidx.core.widget.NestedScrollView
+        android:id="@+id/nsv_search"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_search"
             android:layout_width="match_parent"
             android:layout_height="0dp">
 
             <ProgressBar
+                android:id="@+id/progress_bar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="16dp"
@@ -48,6 +51,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_games"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingStart="4dp"
@@ -72,6 +76,7 @@
                 app:layout_constraintStart_toStartOf="parent" />
 
             <include
+                android:id="@+id/view_error"
                 layout="@layout/view_error"
                 android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="parent"

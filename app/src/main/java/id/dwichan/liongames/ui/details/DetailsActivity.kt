@@ -19,7 +19,7 @@ class DetailsActivity : AppCompatActivity() {
 
     private var _binding: ActivityDetailsBinding? = null
     private val binding get() = _binding!!
-
+    
     private val requestOptions = RequestOptions()
         .diskCacheStrategy(DiskCacheStrategy.ALL)
         .override(320, 240)

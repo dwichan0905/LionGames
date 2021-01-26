@@ -7,6 +7,7 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.Observer
+import androidx.lifecycle.viewModelScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import id.dwichan.liongames.R
 import id.dwichan.liongames.core.data.Resource
@@ -20,7 +21,7 @@ class SearchActivity : AppCompatActivity() {
 
     private var _binding: ActivitySearchBinding? = null
     private val binding get() = _binding!!
-
+    
     private lateinit var adapter: GamesAdapter
     private val searchViewModel: SearchViewModel by viewModel()
 
