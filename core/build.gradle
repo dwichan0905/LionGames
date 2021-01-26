@@ -60,6 +60,10 @@ dependencies {
     kapt "androidx.room:room-compiler:2.2.6"
     androidTestImplementation "androidx.room:room-testing:2.2.6"
 
+    // encrypt sqlite
+    implementation 'net.zetetic:android-database-sqlcipher:4.4.2'
+    implementation "androidx.sqlite:sqlite-ktx:2.1.0"
+
     // retrofit
     implementation "com.squareup.retrofit2:retrofit:2.9.0"
     implementation "com.squareup.retrofit2:converter-gson:2.9.0"

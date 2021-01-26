@@ -10,6 +10,8 @@ import id.dwichan.liongames.core.data.source.remote.RemoteDataSource
 import id.dwichan.liongames.core.data.source.remote.network.ApiService
 import id.dwichan.liongames.core.domain.repository.IGameRepository
 import id.dwichan.liongames.core.utils.AppExecutors
+import net.sqlcipher.database.SQLiteDatabase
+import net.sqlcipher.database.SupportFactory
 import okhttp3.OkHttpClient
 import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module
@@ -21,10 +23,15 @@ import java.util.concurrent.TimeUnit
 val databaseModule = module {
     factory { get<GamesDatabase>().gamesDao() }
     single {
+        val password: ByteArray = SQLiteDatabase.getBytes("sebentar".toCharArray())
+        val factory = SupportFactory(password)
         Room.databaseBuilder(
             androidContext(),
             GamesDatabase::class.java, "GamesDatabase.db"
-        ).fallbackToDestructiveMigration().build()
+        )
+            .fallbackToDestructiveMigration()
+            .openHelperFactory(factory)
+            .build()
     }
 }
 
