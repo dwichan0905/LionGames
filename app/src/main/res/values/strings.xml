@@ -31,7 +31,6 @@
     <string name="search_end">- Search results is over. -</string>
     <string name="title_favorite">Your Favorite</string>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_about">About</string>
     <string name="app_ver">1.0 (2021)</string>
     <string name="label_developer">Developer</string>
@@ -42,5 +41,5 @@
     <string name="developer_github">dwichan0905</string>
     <string name="visit_github">Visit my GitHub Profile</string>
     <string name="released">Release Date</string>
-    <string name="example_release_date">2020-02-01</string>
+    <string name="example_release_date">2020–02–01</string>
 </resources>

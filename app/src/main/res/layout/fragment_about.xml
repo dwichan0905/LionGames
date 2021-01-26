@@ -14,8 +14,8 @@
             android:layout_height="150dp"
             android:layout_gravity="center"
             android:layout_margin="16dp"
-            android:src="@mipmap/ic_launcher"
-            android:elevation="1dp" />
+            android:elevation="1dp"
+            android:src="@mipmap/ic_launcher" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -104,7 +104,6 @@
         </TableLayout>
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn_visit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="36dp"
