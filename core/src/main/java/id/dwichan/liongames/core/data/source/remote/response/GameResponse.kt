@@ -12,16 +12,16 @@ data class GameResponse(
     val name: String,
 
     @field:SerializedName("released")
-    val released: String,
+    val released: String?,
 
     @field:SerializedName("background_image")
-    val backgroundImage: String,
+    val backgroundImage: String?,
 
     @field:SerializedName("rating")
     val rating: Double,
 
     @field:SerializedName("platforms")
-    val supportedPlatform: List<Platforms>,
+    val supportedPlatform: List<Platforms>?,
 
     @field:SerializedName("playtime")
     val playtime: Int,

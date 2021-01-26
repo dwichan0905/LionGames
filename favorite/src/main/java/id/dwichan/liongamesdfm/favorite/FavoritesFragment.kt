@@ -16,7 +16,8 @@ import org.koin.core.context.loadKoinModules
 class FavoritesFragment : Fragment() {
 
     private val favoritesViewModel: FavoritesViewModel by viewModel()
-    private var binding: FragmentFavoritesBinding? = null
+    private var _binding: FragmentFavoritesBinding? = null
+    private val binding get() = _binding!!
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,45 +28,43 @@ class FavoritesFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        binding = FragmentFavoritesBinding.inflate(inflater, container, false)
-        return binding?.root
+    ): View {
+        _binding = FragmentFavoritesBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
-        if (activity != null) {
-            binding?.progressBar?.visibility = View.VISIBLE
+        binding.progressBar.visibility = View.VISIBLE
 
-            val adapter = GamesAdapter()
-            adapter.onItemClick = { selectedData ->
-                val i = Intent(activity, DetailsActivity::class.java)
-                i.putExtra(DetailsActivity.EXTRA_GAMES, selectedData)
-                startActivity(i)
+        val adapter = GamesAdapter()
+        adapter.onItemClick = { selectedData ->
+            val i = Intent(activity, DetailsActivity::class.java)
+            i.putExtra(DetailsActivity.EXTRA_GAMES, selectedData)
+            startActivity(i)
+        }
+
+        favoritesViewModel.games.observe(viewLifecycleOwner, {
+            binding.progressBar.visibility = View.GONE
+            if (it.isEmpty()) {
+                binding.viewEmpty.root.visibility = View.VISIBLE
+                adapter.setData(ArrayList())
+            } else {
+                binding.viewEmpty.root.visibility = View.GONE
+                adapter.setData(it)
             }
+        })
 
-            favoritesViewModel.games.observe(viewLifecycleOwner, {
-                binding?.progressBar?.visibility = View.GONE
-                if (it.isEmpty()) {
-                    binding?.viewEmpty?.visibility = View.VISIBLE
-                    adapter.setData(ArrayList())
-                } else {
-                    binding?.viewEmpty?.visibility = View.GONE
-                    adapter.setData(it)
-                }
-            })
-
-            with(binding?.rvGames) {
-                this?.layoutManager = LinearLayoutManager(context)
-                this?.setHasFixedSize(true)
-                this?.adapter = adapter
-            }
+        with(binding.rvGames) {
+            this.layoutManager = LinearLayoutManager(context)
+            this.setHasFixedSize(true)
+            this.adapter = adapter
         }
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
-        binding = null
+        _binding = null
     }
 }

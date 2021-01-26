@@ -25,9 +25,22 @@ class RemoteDataSource(private val apiService: ApiService) {
             .take(1)
             .subscribe({ response ->
                 val dataArray = response.results
-                resultData.onNext(if (dataArray.isNotEmpty()) ApiResponse.Success(dataArray) else ApiResponse.Empty)
+                resultData.onNext(
+                    if (dataArray.isNotEmpty())
+                        ApiResponse.Success(dataArray)
+                    else
+                        ApiResponse.Empty
+                )
             }, { error ->
-                resultData.onNext(ApiResponse.Error(error.message.toString()))
+                resultData.onNext(
+                    ApiResponse.Error(
+                        """
+                    Oops, an error occurred! We will fix it immediately!
+                    Reason:
+                    ${error.message.toString()}
+                """.trimIndent()
+                    )
+                )
                 Log.e("RemoteDataSource", error.toString())
             })
 
@@ -45,9 +58,22 @@ class RemoteDataSource(private val apiService: ApiService) {
             .take(1)
             .subscribe({ response ->
                 val dataArray = response.results
-                resultData.onNext(if (dataArray.isNotEmpty()) ApiResponse.Success(dataArray) else ApiResponse.Empty)
+                resultData.onNext(
+                    if (dataArray.isNotEmpty())
+                        ApiResponse.Success(dataArray)
+                    else
+                        ApiResponse.Empty
+                )
             }, { error ->
-                resultData.onNext(ApiResponse.Error(error.message.toString()))
+                resultData.onNext(
+                    ApiResponse.Error(
+                        """
+                    Oops, an error occurred! We will fix it immediately!
+                    Reason:
+                    ${error.message.toString()}
+                """.trimIndent()
+                    )
+                )
                 Log.e("RemoteDataSource", error.toString())
             })
 

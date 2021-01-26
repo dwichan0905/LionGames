@@ -12,30 +12,32 @@ object DataMapper {
         input.map {
             val platform = it.supportedPlatform
             var supportedPlatform = ""
-            for (j in platform.indices) {
-                supportedPlatform += if (j == (platform.size - 1))
-                    platform[j].platform.name
-                else
-                    platform[j].platform.name + ", "
+            if (platform != null) {
+                for (j in platform.indices) {
+                    supportedPlatform += if (j == platform.lastIndex)
+                        platform[j].platform.name
+                    else
+                        platform[j].platform.name + ", "
+                }
             }
 
             val genres = it.genres
             var genre = ""
             for (k in genres.indices) {
-                genre += if (k == genres.size - 1)
+                genre += if (k == genres.lastIndex)
                     genres[k].name
                 else
                     genres[k].name + ", "
             }
 
-            val platformName = platform[0].platform.name
-            val platformRequirements = platform[0].requirements?.minimum ?: ""
+            val platformName = platform?.get(0)?.platform?.name ?: "Unknown"
+            val platformRequirements = platform?.get(0)?.requirements?.minimum ?: ""
 
             val game = GameEntity(
                 id = it.id,
                 name = it.name,
-                released = it.released,
-                backgroundImage = it.backgroundImage,
+                released = it.released ?: "undefined",
+                backgroundImage = it.backgroundImage ?: "",
                 rating = it.rating,
                 supportedPlatform = supportedPlatform,
                 platformName = platformName,
@@ -62,7 +64,7 @@ object DataMapper {
                 platformRequirements = it.platformRequirements,
                 playtime = it.playtime,
                 genres = it.genres,
-                isFavorite = it.isFavorite
+                isFavorite = it.isFavorite ?: false
             )
         }
 

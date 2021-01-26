@@ -1,5 +1,6 @@
 package id.dwichan.liongames.core.data
 
+import android.annotation.SuppressLint
 import id.dwichan.liongames.core.data.source.local.LocalDataSource
 import id.dwichan.liongames.core.data.source.remote.RemoteDataSource
 import id.dwichan.liongames.core.data.source.remote.network.ApiResponse
@@ -60,12 +61,17 @@ class GamesRepository(
                 return remoteDataSource.getSpecificGames(query)
             }
 
+            @SuppressLint("CheckResult")
             override fun saveCallResult(data: List<GameResponse>) {
                 val gamesList = DataMapper.mapResponsesToEntities(data)
                 localDataSource.insertGames(gamesList)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe()
+                    .subscribe({
+                        /* no-op */
+                    }, {
+                        /* no-op */
+                    })
             }
         }.asFlowable()
     }

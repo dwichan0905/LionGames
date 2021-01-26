@@ -15,23 +15,24 @@ import id.dwichan.liongames.ui.search.SearchActivity
 
 class MainActivity : AppCompatActivity() {
 
-    private var binding: ActivityMainBinding? = null
+    private var _binding: ActivityMainBinding? = null
+    private val binding get() = _binding!!
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding?.root)
+        _binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        setSupportActionBar(binding?.toolbar)
+        setSupportActionBar(binding.toolbar)
 
         val navController = findNavController(R.id.nav_host_fragment)
         val appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.navigation_games, R.id.navigation_favorites
+                R.id.navigation_games, R.id.navigation_favorites, R.id.navigation_about
             )
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
-        binding?.navView?.setupWithNavController(navController)
+        binding.navView.setupWithNavController(navController)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -51,6 +52,6 @@ class MainActivity : AppCompatActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
-        binding = null
+        _binding = null
     }
 }

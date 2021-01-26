@@ -46,6 +46,8 @@ class GamesAdapter : RecyclerView.Adapter<GamesAdapter.GamesViewHolder>() {
                 val requestOptions = RequestOptions()
                     .diskCacheStrategy(DiskCacheStrategy.ALL)
                     .override(320, 240)
+                    .error(R.drawable.ic_error)
+                    .placeholder(R.drawable.ic_loading)
 
                 Glide.with(itemView.context)
                     .asBitmap()

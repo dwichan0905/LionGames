@@ -17,10 +17,14 @@ class DetailsActivity : AppCompatActivity() {
 
     private val detailsViewModel: DetailsViewModel by viewModel()
 
-    private var binding: ActivityDetailsBinding? = null
+    private var _binding: ActivityDetailsBinding? = null
+    private val binding get() = _binding!!
+    
     private val requestOptions = RequestOptions()
         .diskCacheStrategy(DiskCacheStrategy.ALL)
         .override(320, 240)
+        .error(R.drawable.ic_error)
+        .placeholder(R.drawable.ic_loading)
 
     companion object {
         const val EXTRA_GAMES = "extra_games"
@@ -28,10 +32,10 @@ class DetailsActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityDetailsBinding.inflate(layoutInflater)
-        setContentView(binding?.root)
+        _binding = ActivityDetailsBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        setSupportActionBar(binding?.toolbar!!)
+        setSupportActionBar(binding.toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         val gameDetail = intent.getParcelableExtra<Game>(EXTRA_GAMES)
@@ -40,26 +44,27 @@ class DetailsActivity : AppCompatActivity() {
 
     private fun showDetails(game: Game?) {
         game?.let {
-            binding?.tvGameName?.text = it.name
-            binding?.tvGameGenre?.text = it.genres
+            binding.tvGameName.text = it.name
+            binding.tvGameGenre.text = it.genres
 
             Glide.with(this)
                 .asBitmap()
                 .load(it.backgroundImage)
                 .apply(requestOptions)
-                .into(binding?.imgBackground!!)
+                .into(binding.imgBackground)
 
             var statusFavorite = it.isFavorite
             setFavoriteStatus(statusFavorite)
 
-            with(binding?.contentDetails) {
+            with(binding.contentDetails) {
                 Glide.with(this@DetailsActivity)
                     .asBitmap()
                     .load(it.backgroundImage)
                     .apply(requestOptions)
-                    .into(this?.imgGame!!)
+                    .into(this.imgGame)
 
                 tvGameRating.text = it.rating.toString()
+                tvGameReleaseDate.text = it.released
                 tvGameGenre.text = it.genres
                 tvGamePlatforms.text = it.supportedPlatform
                 val playtime = resources.getQuantityString(
@@ -87,19 +92,19 @@ class DetailsActivity : AppCompatActivity() {
     }
 
     private fun setFavoriteStatus(status: Boolean) {
-        with(binding?.contentDetails?.btnAddToFavorite) {
+        with(binding.contentDetails.btnAddToFavorite) {
             if (status) {
-                this?.icon = ContextCompat.getDrawable(
+                this.icon = ContextCompat.getDrawable(
                     this@DetailsActivity,
                     R.drawable.ic_baseline_favorite_24
                 )
-                this?.text = resources.getString(R.string.remove_from_favorite)
+                this.text = resources.getString(R.string.remove_from_favorite)
             } else {
-                this?.icon = ContextCompat.getDrawable(
+                this.icon = ContextCompat.getDrawable(
                     this@DetailsActivity,
                     R.drawable.ic_baseline_favorite_border_24
                 )
-                this?.text = resources.getString(R.string.add_to_favorite)
+                this.text = resources.getString(R.string.add_to_favorite)
             }
         }
     }
@@ -111,6 +116,6 @@ class DetailsActivity : AppCompatActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
-        binding = null
+        _binding = null
     }
 }

@@ -6,7 +6,7 @@ import id.dwichan.liongames.core.data.source.local.entity.GameEntity
 
 @Database(
     entities = [GameEntity::class],
-    version = 1,
+    version = 2,
     exportSchema = false
 )
 abstract class GamesDatabase : RoomDatabase() {
