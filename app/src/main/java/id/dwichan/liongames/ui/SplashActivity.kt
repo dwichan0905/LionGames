@@ -19,8 +19,6 @@ class SplashActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         _binding = ActivitySplashBinding.inflate(layoutInflater)
         window.apply {
-            addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
-            statusBarColor = Color.TRANSPARENT
             navigationBarColor = Color.BLACK
         }
         setContentView(binding.root)
