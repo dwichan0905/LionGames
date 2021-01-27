@@ -32,4 +32,7 @@ dependencies {
     implementation "org.koin:koin-android:2.2.2"
     implementation "org.koin:koin-android-viewmodel:2.2.2"
 
+    // lottie
+    implementation "com.airbnb.android:lottie:3.5.0"
+
 }
