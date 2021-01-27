@@ -20,7 +20,7 @@ class SearchActivity : AppCompatActivity() {
 
     private var _binding: ActivitySearchBinding? = null
     private val binding get() = _binding!!
-    
+
     private lateinit var adapter: GamesAdapter
     private val searchViewModel: SearchViewModel by viewModel()
 

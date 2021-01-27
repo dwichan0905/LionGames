@@ -19,7 +19,7 @@ class DetailsActivity : AppCompatActivity() {
 
     private var _binding: ActivityDetailsBinding? = null
     private val binding get() = _binding!!
-    
+
     private val requestOptions = RequestOptions()
         .diskCacheStrategy(DiskCacheStrategy.ALL)
         .override(320, 240)
@@ -44,8 +44,8 @@ class DetailsActivity : AppCompatActivity() {
 
     private fun showDetails(game: Game?) {
         game?.let {
-            binding.tvGameName.text = it.name
-            binding.tvGameGenre.text = it.genres
+            binding.tvName.text = it.name
+            binding.tvGenre.text = it.genres
 
             Glide.with(this)
                 .asBitmap()
