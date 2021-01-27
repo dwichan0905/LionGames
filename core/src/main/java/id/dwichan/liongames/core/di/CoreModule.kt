@@ -12,6 +12,7 @@ import id.dwichan.liongames.core.domain.repository.IGameRepository
 import id.dwichan.liongames.core.utils.AppExecutors
 import net.sqlcipher.database.SQLiteDatabase
 import net.sqlcipher.database.SupportFactory
+import okhttp3.CertificatePinner
 import okhttp3.OkHttpClient
 import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module
@@ -37,6 +38,12 @@ val databaseModule = module {
 
 val networkModule = module {
     single {
+        val baseUrl = "api.rawg.io"
+        val certificate = CertificatePinner.Builder()
+            .add(baseUrl, "sha256/R+V29DqDnO269dFhAAB5jMlZHepWpDGuoejXJjprh7A=")
+            .add(baseUrl, "sha256/FEzVOUp4dF3gI0ZVPRJhFbSJVXR+uQmMH65xhs1glH4=")
+            .add(baseUrl, "sha256/Y9mvm0exBk1JoQ57f9Vm28jKo5lFm/woKcVxrYxu80o=")
+            .build()
         OkHttpClient.Builder()
             .addInterceptor(
                 ChuckerInterceptor.Builder(androidContext())
@@ -48,11 +55,13 @@ val networkModule = module {
             )
             .connectTimeout(120, TimeUnit.SECONDS)
             .readTimeout(120, TimeUnit.SECONDS)
+            .certificatePinner(certificate)
             .build()
     }
     single {
+        val baseUrl = "https://api.rawg.io/api/"
         val retrofit = Retrofit.Builder()
-            .baseUrl("https://api.rawg.io/api/")
+            .baseUrl(baseUrl)
             .addConverterFactory(GsonConverterFactory.create())
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .client(get())

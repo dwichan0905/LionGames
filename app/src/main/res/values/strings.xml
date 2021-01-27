@@ -40,5 +40,5 @@
     <string name="developer_github">dwichan0905</string>
     <string name="visit_github">Visit my GitHub Profile</string>
     <string name="released">Release Date</string>
-    <string name="example_release_date">2020–02-01</string>
+    <string name="example_release_date">2020–02–01</string>
 </resources>

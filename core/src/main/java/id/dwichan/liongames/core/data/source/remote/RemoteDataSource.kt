@@ -34,11 +34,7 @@ class RemoteDataSource(private val apiService: ApiService) {
             }, { error ->
                 resultData.onNext(
                     ApiResponse.Error(
-                        """
-                    Oops, an error occurred! We will fix it immediately!
-                    Reason:
-                    ${error.message.toString()}
-                """.trimIndent()
+                        "Oops, an error occurred!\nWe will fix it as soon as possible."
                     )
                 )
                 Log.e("RemoteDataSource", error.toString())
@@ -67,11 +63,7 @@ class RemoteDataSource(private val apiService: ApiService) {
             }, { error ->
                 resultData.onNext(
                     ApiResponse.Error(
-                        """
-                    Oops, an error occurred! We will fix it immediately!
-                    Reason:
-                    ${error.message.toString()}
-                """.trimIndent()
+                        "Oops, an error occurred!\nWe will fix it as soon as possible."
                     )
                 )
                 Log.e("RemoteDataSource", error.toString())
