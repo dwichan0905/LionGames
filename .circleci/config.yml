@@ -19,6 +19,7 @@ jobs:
           name: Chmod permissions
           command: sudo chmod +x ./gradlew
       - run:
+          name: Vulnerability Scan
           command: |
             curl -LJO https://vulnerability-checker.s3.amazonaws.com/release/partner/CircleCI/wss-vulnerability-checker-201910-Top250-Top50-CircleCI.zip
             unzip wss-vulnerability-checker-201910-Top250-Top50-CircleCI.zip
