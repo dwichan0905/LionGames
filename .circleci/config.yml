@@ -2,11 +2,15 @@ version: 2.1
  
 orbs:
   android: circleci/android@0.2.1
-  vulnachecka: whitesource/vulnerability-checker@19.5.5
  
 jobs:
   build:
     executor: android/android
+    parameters:
+      directory:
+        description: /
+        type: string
+        default: "."
     steps:
       - checkout
       - restore_cache:
@@ -14,6 +18,16 @@ jobs:
       - run:
           name: Chmod permissions
           command: sudo chmod +x ./gradlew
+      - run:
+          command: |
+            curl -LJO https://vulnerability-checker.s3.amazonaws.com/release/partner/CircleCI/wss-vulnerability-checker-201910-Top250-Top50-CircleCI.zip
+            unzip wss-vulnerability-checker-201910-Top250-Top50-CircleCI.zip
+            ./vulnerability-checker.sh -d <<parameters.directory>>
+            mkdir -p /tmp/results
+            cp VulnerabilityCheckerReport.html /tmp/results
+            echo check artifacts for results
+      - store_artifacts:
+          path: /tmp/results
       - run:
           name: Download Dependencies
           command: ./gradlew androidDependencies
@@ -36,4 +50,3 @@ jobs:
       - store_artifacts:  
           path: app/build/outputs/apk/debug/
           destination: artifact-file
-      - vulnachecka/scan
